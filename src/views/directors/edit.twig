@@ -1,0 +1,25 @@
+{# Edit action template for Directors controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{  'Edit director'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<h2>{{ 'Edit director'|trans }}	</h2>
+			<form action="{{ url ('directors_edit', {'id': director.id}) }}" method="post">
+				{{ form_widget(form) }}
+				<input class="btn btn-success" type="submit" name="submit" value="{{ 'Save'|trans }}" />
+				<div>
+					<a class="btn btn-primary" href="{{ url('directors_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+				</div>
+			</form>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Sorry, you have no permission here'|trans }}.
+			</div>
+			<a class="btn btn-default" href="{{ url('directors_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+		{% endif %}
+	{% endif %}	
+{% endblock %}
+
+

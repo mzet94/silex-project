@@ -1,0 +1,33 @@
+{# Add action template for Movies controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Add movie'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<h2>{{ 'Add movie'|trans }}</h2>
+				<form action="{{ url('movies_add') }}" method="post">
+					{{ form_widget(form) }}
+					<input class="btn btn-success" type="submit" name="submit" value="{{ 'Save'|trans }}" />
+					<div>
+						<a class="btn btn-default" href="{{ url('movies_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+					</div>
+				</form>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Sorry, you have no permission here'|trans }}.
+			</div>
+			<a class="btn btn-default" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+		{% endif %}
+	{% else %}
+		<div class="alert alert-danger" role="alert">
+			{{ 'Sorry, you have no permission here'|trans }}.
+		</div>
+		<a class="btn btn-default" href="{{ url('auth_login', {'page': 1 }) }}" title="{{ 'Sign in'|trans }}">{{ 'Sign in'|trans }}</a>
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+			<div class="alert alert-{{ flashMessage.type }}" role="alert">
+				{{ flashMessage.content }}
+			</div>	
+		{% endfor %}
+	{% endif %} 
+{% endblock %}

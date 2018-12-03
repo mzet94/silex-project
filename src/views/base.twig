@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
+			<link href="{{ app.request.basepath }}/assets/bootstrap/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+			<script src="{{ app.request.basepath }}/assets/bootstrap//bootstrap/js/bootstrap.min.js"></script>
+			<style type="text/css">
+			.div {
+				padding-top: 70px;
+				font-family: 'Work Sans', sans-serif;
+				font-size: 15px;
+			}
+			</style>
+			<title>{% block title %}{{ 'Movie Tickets'|trans }}{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+	<div class="div">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+						<span class="sr-only">Expand</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{{ url('seances_index')}}">{{ 'Movie Tickets'|trans }}</a>
+				</div>
+				<!-- for mobile devices -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav">
+						<li><a href="{{ url('seances_index') }}">{{ 'Seances'|trans }}</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'List of...'|trans }}<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{{ url('movies_index') }}">{{ 'Movies'|trans }}</a></li>
+								<li><a href="{{ url('directors_index') }}">{{ 'Directors'|trans }}</a></li>
+								<li><a href="{{ url('locations_index') }}">{{ 'Cinemas'|trans }}</a></li>
+							</ul>
+						</li>
+					</ul>      
+					<ul class="nav navbar-nav navbar-left">
+						<li class="dropdown">
+						<li role="separator" class="divider"></li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<li><a href="{{ url('users_index') }}" title="{{ 'Users list'|trans }}">
+							{{ 'Users list'|trans }}</a></li>
+							<li><a href="{{ url('transactions_index') }}" title="{{ 'Transactions'|trans }}">
+							{{ 'Transactions'|trans }}</a></li>
+						{% endif %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						{% if is_granted('IS_AUTHENTICATED_FULLY') == NULL %}
+							<li>
+								<a href="{{ url('users_register') }}" title="{{ 'Create account'|trans }}">{{ 'Create account'|trans }}</a>
+							</li>
+							<li>
+								<a href="{{ url('auth_login') }}" title="{{ 'Sign in'|trans }}">{{ 'Sign in'|trans }}</a>
+							</li>
+						{% endif %}
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<li>
+								<a href="{{ url('users_indexprofile') }}" title="{{ 'Profile'|trans }}">{{ 'Profile'|trans }}</a>
+								
+							</li>
+							<li>
+								<a href="{{ url('auth_logout') }}" title="{{ 'Logout'|trans }}">{{ 'Logout'|trans }}</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div>
+            {% for flashMessage in app.session.getFlashBag.get('message') %}
+				<div class="alert alert-{{ flashMessage.type }}">
+					{{ flashMessage.content }}
+				</div>
+            {% endfor %}
+        </div>
+        <div id="content" class="container">
+			{% block content %}{% endblock %}
+		</div>
+		<div class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container">
+			    <p class=" navbar-text pull-left">
+					<a href="{{ url('seances_contact') }}">{{ 'Contact'|trans }}</a>
+				</p>
+				<p class=" navbar-text pull-right"> Copyright &copy; Marta Zięba 2015</p>
+			</div>
+        </div>
+	</div>
+    </body>
+</html>

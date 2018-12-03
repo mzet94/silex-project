@@ -1,0 +1,22 @@
+{# Register action template for Users controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Register'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') == NULL %}
+		<h2>{{ 'Create account'|trans }}</h2>
+			<form action="{{ url('users_register') }}" method="post">
+				{{ form_widget(form) }}
+				<input class="btn btn-success" type="submit" name="submit" value="{{ 'Register'|trans }}" />
+				<div>
+					<a class="btn btn-primary" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Cancel'|trans }}">{{ 'Cancel'|trans }}</a>
+				</div>
+			</form>
+	{% else %}
+		<div class="alert alert-danger" role="alert">
+			{{'Sorry, page not found.'|trans}}
+		</div>
+		<a class="btn btn-primary" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+   {% endif %}
+{% endblock %}
+

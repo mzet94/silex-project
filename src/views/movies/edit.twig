@@ -1,0 +1,16 @@
+{# Edit action template for Movies controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{  'Edit movie'|trans }}{% endblock %}
+{% block content %}
+    <h2>{{ 'Edit movie'|trans }}</h2>
+		<form action="{{ url ('movies_edit', {'id': movie.id}) }}" method="post">
+			{{ form_widget(form) }}
+			<input class="btn btn-primary" type="submit" name="submit" value="{{ 'Save'|trans }}" />
+			<div>
+				<a class="btn btn-primary" href="{{ url('movies_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+			</div>
+		</form>
+{% endblock %}
+
+

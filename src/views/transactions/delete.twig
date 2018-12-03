@@ -1,0 +1,17 @@
+{# Delete action template for Transactions controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Delete transaction'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<h2>{{ transaction.login }} - {{ transaction.date }}</h2>
+			<p>{{ 'Do you want to delete this transaction?'|trans }}</p>
+			<form action="{{ url('transactions_delete', {'id' : transaction.id}) }}" method="post">
+				{{ form_widget(form) }}
+				<input class="btn btn-danger" type="submit" name="submit" value="{{ 'Yes'|trans }}" />
+				<div>
+					<a class="btn btn-primary" href="{{ url('transactions_view', {'id': transaction.id}) }}" title="{{ 'Cancel'|trans }}">{{ 'Cancel'|trans }}</a>
+				</div>
+			</form>
+	{% endif %}
+{% endblock %}

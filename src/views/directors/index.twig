@@ -1,0 +1,61 @@
+{# Index action template for Directors controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Directors list'|trans }}{% endblock %}
+{% block content %}
+    <h2>{{ 'Directors list'|trans }}</h2>
+	{% if is_granted('ROLE_ADMIN') %}
+		<p>
+			<a class="btn btn-success" href="{{ url('directors_add') }}" title="{{ 'Add director'|trans }}">
+				{{ 'Add director'|trans }}</a>
+		</p>
+	{% endif %}
+    {%  if directors|length > 0 %}
+        <table class="table table-responsive table-hover">
+            <thead>
+				<tr>
+				   	<th>{{ 'First name'|trans }}</th>
+					<th>{{ 'Last name'|trans }}</th>
+				</tr>
+            </thead>
+            <tbody>
+				{% for director in directors %}
+					<tr>
+						<td>{{ director.firstName|e }}</td>
+						<td>{{ director.surname|e }}</td>
+						{% if is_granted('ROLE_ADMIN') %}
+							<td>
+								<a class="btn btn-primary" href="{{ url('directors_edit', {'id': director.id}) }}" title="{{ 'Edit director'|trans }}">{{ 'Edit director'|trans }}</a>
+							</td>
+							<td>
+								<a class="btn btn-danger" href="{{ url('directors_delete', {'id': director.id}) }}" title="{{ 'Delete director'|trans }}">{{ 'Delete director'|trans }}</a>
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+            </tbody>
+        </table>
+		<div>
+			<ul class="pager">
+				{% if paginator.page > 1 %}
+					{% set previous = (paginator.page - 1) %}
+					<li  class="previous">  <a href="{{ url('directors_index', {'page': previous}) }}" title="{{ 'previous page'|trans }}"> &larr;{{ 'previous page'|trans }}</a></li>
+				{% endif %}
+
+				{% if paginator.page < paginator.pagesCount %}
+					{% set next = (paginator.page + 1) %}
+					<li class="next">  <a  href="{{ url('directors_index', {'page': next}) }}" title="{{ 'next page'|trans }}">{{ 'next page'|trans }} &rarr;</a></li>
+				{% endif %}
+			</ul>
+        </div>
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+    		<div class="alert alert-{{ flashMessage.type }}" role="alert">
+      			{{ flashMessage.content }}
+			</div>
+		{% endfor %}
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            {{ 'Directors not found'|trans }}.
+        </div>
+    {% endif %}
+{% endblock %}

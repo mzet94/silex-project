@@ -1,0 +1,11 @@
+{# 500 error template #}
+{% extends 'base.twig' %}
+
+{% block title %}{{  '500 error'|trans }}{% endblock %}
+{% block content %}
+    <h1>
+        {{ '500 error'|trans }}
+    </h1>
+    <p>{{ 'Internal Server Error.'|trans }}</p>
+    <p><a href="{{ url('seances_index') }}" title="{{'Homepage'|trans}}">{{'Homepage'|trans}}</a></p>
+{% endblock %}

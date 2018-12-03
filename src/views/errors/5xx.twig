@@ -1,0 +1,11 @@
+{# 5xx error template #}
+{% extends 'base.twig' %}
+
+{% block title %}{{  '5xx error'|trans }}{% endblock %}
+{% block content %}
+    <h1>
+        {{ '5xx error'|trans }}
+    </h1>
+    <p>{{ 'Internal Server Error.'|trans }}</p>
+    <p><a href="{{ url('seances_index') }}" title="{{'Homepage'|trans}}">{{'Homepage'|trans}}</a></p>
+{% endblock %}

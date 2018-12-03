@@ -1,0 +1,14 @@
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Log in'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<a href="{{ url('auth_logout') }}" title="{{ 'Logout'|trans }}">{{ 'Logout'|trans }}</a>
+	{% endif %}
+	 <h1>{{ 'Logging'|trans }}</h1>
+    {{ error|trans }}
+    <form action="{{ path('auth_login_check') }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" name="submit" value="{{ 'Log in'|trans }}" />
+    </form>
+{% endblock %}

@@ -1,0 +1,56 @@
+{# View action template for Transactions controller #}
+{% extends 'base.twig' %}
+
+{% block title %} {{ 'Transaction'|trans }} {% endblock %}
+{% block content %}
+	{% if transaction|length > 0 %}
+		<h2>{{ 'Transaction data'|trans }}</h2>
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<td>{{ 'User'|trans }}</td>
+						<td>{{ transaction.login }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Seance'|trans }}</td>
+						<td>{{ transaction.title }} ({{ transaction.seance_date }})</td>
+					</tr>
+					<tr>
+						<td>{{ 'Transaction date'|trans }}</td>
+						<td>{{ transaction.date }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Tickets'|trans }}</td>
+						<td>{{ transaction.tickets }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Payment method'|trans }}</td>
+						<td>{{ transaction.paymentMethod_id|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Payment status'|trans }}</td>
+						<td>{{ transaction.paymentStatus_id|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Collection'|trans }}</td>
+						<td>{{ transaction.collection_id|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'For payment'|trans }}</td>
+						<td>{{ transaction.ticketsPrice }} zł</td>
+					</tr>
+				</thead>
+			</table>
+	{% else %}
+			Invalid data.
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<div>
+			<a class="btn btn-primary pull-right" href="{{ url('transactions_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+		</div>
+	{% else %}
+		<div>
+			<a class="btn btn-primary pull-right" href="{{ url('index_orders', {'id': user.id} ) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+		</div>
+	{% endif %}
+{% endblock %}

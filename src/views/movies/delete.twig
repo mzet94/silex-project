@@ -1,0 +1,15 @@
+{# Delete action template for Movies controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Delete movie'|trans }}{% endblock %}
+{% block content %}
+    <h2>{{ movie.title }}</h2>
+    	<p>{{ 'Do you want to delete this movie?'|trans }}</p>
+		<form action="{{ url('movies_delete', {'id' : movie.id}) }}" method="post">
+			{{ form_widget(form) }}
+			<input class="btn btn-danger" type="submit" name="submit" value="{{ 'Yes'|trans }}" />
+			<div>
+			 <a class="btn btn-primary" href="{{ url('movies_index') }}" title="{{ 'Cancel'|trans }}">{{ 'Cancel'|trans }}</a>
+			</div>
+		</form>
+{% endblock %}

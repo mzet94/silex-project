@@ -1,0 +1,45 @@
+{# View action template for Seances controller #}
+{% extends 'base.twig' %}
+
+{% block title %} {{ 'Seance'|trans }} {% endblock %}
+{% block content %}
+	{% if seance|length > 0 %}
+		<h2> {{ seance.movie_id }} </h2>
+			<table class="table table-responsive table-hover">
+				<thead>
+					<tr>
+						<td>{{ 'Cinema'|trans }}</td>
+						<td>{{ seance.location_id }} {{ seance.city }} {{ seance.street }} {{ seance. number }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Hall'|trans }}</td>
+						<td>{{ seance.hall }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Date'|trans }}</td>
+						<td>{{ seance.date }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Time'|trans }}</td>
+						<td>{{ seance.time }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Seats'|trans }}</td>
+						<td>{{ seance.seats }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Price'|trans }}</td>
+						<td>{{ seance.price }} zł </td> 
+					</tr>
+				</thead>
+			</table>
+	{% else %}
+		Invalid data.
+	{% endif %}
+	<div>
+		<a class="btn btn-success pull-left" href="{{ url('transactions_add', {'id': seance.id}) }}" title="{{ 'Buy a ticket'|trans }}">{{ 'Buy a ticket'|trans }}</a>
+	</div>
+	<div>
+		<a class="btn btn-primary pull-right" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+	</div>	
+{% endblock %}

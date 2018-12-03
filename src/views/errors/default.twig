@@ -1,0 +1,10 @@
+{# Default error template #}
+{% extends 'base.twig' %}
+
+{% block title %}{{  'Default error'|trans }}{% endblock %}
+{% block content %}        
+    <h1>
+        {{ 'Default error'|trans }}
+    </h1>
+    <p><a href="{{ url('seances_index') }}" title="{{'Homepage'|trans}}">{{'Homepage'|trans}}</a></p>
+{% endblock %}

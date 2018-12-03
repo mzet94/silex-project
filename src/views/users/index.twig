@@ -1,0 +1,59 @@
+{# Index action template for Users controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Users list'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<h2>{{ 'Users list'|trans }}</h2> 
+			{% if users|length > 0 %}
+				<table class="table table-responsive table-hover">
+					<thead>
+						<tr>
+							<th>{{ 'Login'|trans }}</th>
+							<th>{{ 'Role'|trans }}</th>
+							<th colspan="3">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							<tr>
+								<td>{{ user.login|e }}</td>
+								<td>{{ user.name|e }}</td>
+								{% if is_granted('ROLE_ADMIN') %}
+									<td>
+										<a class="btn btn-danger" href="{{ url('users_delete', {'id': user.id}) }}" title="{{ 'Delete user'|trans }}">{{ 'Delete user'|trans }}</a>
+									</td>
+								{% endif %}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div>
+					<ul class="pager">
+						{% if paginator.page > 1 %}
+							{% set previous = (paginator.page - 1) %}
+							<li  class="previous">  <a href="{{ url('users_index', {'page': previous}) }}" title="{{ 'previous page'|trans }}"> &larr;{{ 'previous page'|trans }}</a></li>
+						{% endif %}
+						{% if paginator.page < paginator.pagesCount %}
+							{% set next = (paginator.page + 1) %}
+							<li class="next">  <a  href="{{ url('users_index', {'page': next}) }}" title="{{ 'next page'|trans }}">{{ 'next page'|trans }} &rarr;</a></li>
+						{% endif  %}
+					</ul>
+				</div>
+				{% for flashMessage in app.session.getFlashBag.get('message') %}
+					<div class="alert alert-{{ flashMessage.type }}" role="alert">
+						{{ flashMessage.content }}
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="alert alert-danger" role="alert">
+					{{ 'Users not found'|trans }}.
+				</div>
+			{% endif %}
+	{% else %}
+		<div class="alert alert-danger" role="alert">
+			{{'Sorry, you have no permission here.'|trans}}
+		</div>
+		<a class="btn btn-default" href="{{ url('seances_index')}}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+	{% endif %}
+{% endblock %}

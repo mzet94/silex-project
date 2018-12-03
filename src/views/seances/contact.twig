@@ -1,0 +1,15 @@
+{# Contact action template for Seances controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Contact'|trans }}{% endblock %}
+{% block content %}
+    <h1>{{ 'Contact us'|trans }}</h1>
+        <address>
+            <strong> {{ 'Movie Tickets'|trans }}</strong><br>
+			ul. XXXXXX XX<br>
+            Kraków XX-XXX<br>
+			mail: movietickets@mail.com<br>
+			tel.: XXX XXX XXX<br>
+        </address>
+		<a class="btn btn-primary" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+{% endblock %}

@@ -1,0 +1,60 @@
+{# Index action template for Movies controller #}
+
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Movies list'|trans }}{% endblock %}
+{% block content %}
+    <h2>{{ 'Movies list'|trans }}</h2>
+		{% if is_granted('ROLE_ADMIN') %}
+			<p>
+				<a class="btn btn-success" href="{{ url('movies_add') }}" title="{{ 'Add movie'|trans }}">{{ 'Add movie'|trans }}</a>
+			</p>
+		{% endif %}
+		{%  if movies|length > 0 %}
+			<table class="table table-responsive table-hover">
+				<thead>
+					<tr>
+						<th>{{ 'Title'|trans }}</th>
+						<th>{{ 'Director'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for movie in movies %}
+						<tr>
+							<td>{{ movie.title|e }}</td>
+							<td>{{ movie.firstName|e }} {{ movie.surname|e }}</td> 
+							{% if is_granted('ROLE_ADMIN') %}
+								<td>
+									<a class="btn btn-primary" href="{{ url('movies_edit', {'id': movie.id}) }}" title="{{ 'Edit movie'|trans }}">{{ 'Edit movie'|trans }}</a>
+								</td>
+								<td>
+									<a class="btn btn-danger" href="{{ url('movies_delete', {'id': movie.id}) }}" title="{{ 'Delete movie'|trans }}">{{ 'Delete movie'|trans }}</a>
+								</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div>
+				<ul class="pager">
+					{% if paginator.page > 1 %}
+						{% set previous = (paginator.page - 1) %}
+						<li  class="previous">  <a href="{{ url('movies_index', {'page': previous}) }}" title="{{ 'previous page'|trans }}"> &larr;{{ 'previous page'|trans }}</a></li>
+					{%  endif %}
+					{% if paginator.page < paginator.pagesCount %}
+						{% set next = (paginator.page + 1) %}
+						<li class="next">  <a  href="{{ url('movies_index', {'page': next}) }}" title="{{ 'next page'|trans }}">{{ 'next page'|trans }} &rarr;</a></li>
+					{% endif  %}
+				</ul>
+			</div>
+			{% for flashMessage in app.session.getFlashBag.get('message') %}
+				<div class="alert alert-{{ flashMessage.type }}" role="alert">
+					{{ flashMessage.content }}
+				</div>	
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Movies not found.'|trans }}.
+			</div>
+		{% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{# Index orders action template for Transactions controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Orders list'|trans }}{% endblock %}
+{% block content %}
+	<h2>{{ 'Your orders'|trans }}</h2>
+		{% if transactions|length > 0 %}
+			<table class="table table-responsive table-hover">
+				<thead>
+					<tr>
+						<th>{{ 'Seance'|trans }}</th>
+						<th>{{ 'Transaction date'|trans }}</th>
+						<th>{{ 'Price'|trans }}</th>
+						<th colspan="3">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for transaction in transactions %}
+						<tr>
+							<td>{{ transaction.title|e }}</td>
+							<td>{{ transaction.date|e }}</td>
+							<td>{{ transaction.ticketsPrice|e }}</td>
+							<td>
+								<a class="btn btn-info" href="{{ url('transactions_view', {'id': transaction.id}) }}" title="{{ 'View more'|trans }}">{{ 'View more'|trans }}</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div>
+				<ul class="pager">
+					{% if paginator.page > 1 %}
+						{% set previous = (paginator.page - 1) %}
+						<li  class="previous">  <a href="{{ url('index_orders', {'page': previous}) }}" title="{{ 'previous page'|trans }}"> &larr;{{ 'previous page'|trans }}</a></li>
+					{%  endif %}
+					{% if paginator.page < paginator.pagesCount %}
+						{% set next = (paginator.page + 1) %}
+						<li class="next">  <a  href="{{ url('index_orders', {'page': next}) }}" title="{{ 'next page'|trans }}">{{ 'next page'|trans }} &rarr;</a></li>
+					{% endif  %}
+				</ul>
+			</div>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Transactions not found.'|trans }}.
+			</div>
+		{% endif %}
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+			<div class="alert alert-{{ flashMessage.type }}" role="alert">
+				{{ flashMessage.content }}
+			</div>
+		{% endfor %}
+{% endblock %}

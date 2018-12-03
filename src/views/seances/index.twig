@@ -1,0 +1,83 @@
+{# Index action template for Seances controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Seances list'|trans }}{% endblock %}
+{% block content %}
+    <h2>{{ 'Seances list'|trans }}</h2>
+		{% if is_granted('ROLE_ADMIN') %}
+			<p>
+				<a class="btn btn-success" href="{{ url('seances_add') }}"title="{{ 'Add seance'|trans }}">{{ 'Add seance'|trans }}</a>
+			</p>
+		{% endif %}
+		{%  if seances|length > 0 %}
+			<table class="table table-responsive table-hover">
+				<thead>
+					<tr>
+						<th>{{ 'Movie'|trans }}</th>
+						<th>{{ 'Cinema'|trans }}</th>
+						<th>{{ 'Date'|trans }}</th>
+						<th>&nbsp;</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for seance in seances %}
+					<tr>
+						<td>{{ seance.movie_id|e }}</td>
+						<td>{{ seance.location_id|e }}</td>
+						<td>{{ seance.date|e }}</td>
+						<td>
+							<a class="btn btn-info" href="{{ url('seances_view', 
+							{'id': seance.id}) }}" title="{{ 'View more'|trans }}">
+							{{ 'View more'|trans }}</a>
+						</td>
+						{% if is_granted('ROLE_ADMIN') == NULL %}
+							<td>
+								<a class="btn btn-success" href="{{ url('transactions_add',
+								{'id': seance.id}) }}" title="{{ 'Buy a ticket'|trans }}">
+								{{ 'Buy a ticket'|trans }}</a>
+							</td>
+						{% endif %}
+						{% if is_granted('ROLE_ADMIN') %}
+							<td>
+								<a class="btn btn-primary" href="{{ url('seances_edit', 
+								{'id': seance.id}) }}" title="{{ 'Edit seance'|trans }}">
+								{{ 'Edit seance'|trans }}</a>
+							</td>
+							<td>
+								<a class="btn btn-danger" href="{{ url('seances_delete', 
+								{'id': seance.id}) }}" title="{{ 'Delete seance'|trans }}">
+								{{ 'Delete seance'|trans }}</a>
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<div>
+				<ul  class="pager">
+					{% if paginator.page > 1 %}
+						{% set previous = (paginator.page - 1) %}
+						<li  class="previous">  <a href="{{ url('seances_index',
+						{'page': previous}) }}" title="{{ 'previous page'|trans }}"> 
+						&larr;{{ 'previous page'|trans }}</a></li>
+					{%  endif %}
+					{% if paginator.page < paginator.pagesCount %}
+						{% set next = (paginator.page + 1) %}
+						<li class="next">  <a  href="{{ url('seances_index', 
+						{'page': next}) }}" title="{{ 'next page'|trans }}">
+						{{ 'next page'|trans }} &rarr;</a></li>
+					{% endif  %}
+				</ul>
+			</div>
+			{% for flashMessage in app.session.getFlashBag.get('message') %}
+				<div class="alert alert-{{ flashMessage.type }}" role="alert">
+					{{ flashMessage.content }}
+				</div>
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Seances not found'|trans }}.
+			</div>
+		{% endif %}
+{% endblock %}

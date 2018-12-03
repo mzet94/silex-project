@@ -1,0 +1,25 @@
+{# Edit action template for Seances controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Edit seance'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<h2>{{ 'Edit seance'|trans }} : {{ seance.movie_id }}</h2>
+				<form action="{{ url ('seances_edit', {'id': seance.id}) }}" method="post">
+					{{ form_widget(form) }}
+					<input class="btn btn-success" type="submit" name="submit" value="{{ 'Save'|trans }}" />
+					<div>
+						<a class="btn btn-primary" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+					</div>
+				</form>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Sorry, you have no permission here.'|trans }}
+			</div>
+			<a class="btn btn-default" href="{{ url('seances_index')}}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+

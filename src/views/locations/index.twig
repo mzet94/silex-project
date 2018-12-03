@@ -1,0 +1,57 @@
+{# Index action template for Locations controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Locations list'|trans }}{% endblock %}
+{% block content %}
+	<h2>{{ 'Cinemas list'|trans }}</h2>
+		{% if is_granted('ROLE_ADMIN') %}
+			<p><a class="btn btn-primary" href="{{ url('locations_add') }}" title="{{ 'Add cinema'|trans }}">{{ 'Add cinema'|trans }}</a></p>
+		{% endif %}
+		{%  if locations|length > 0 %}
+			<table class="table table-responsive table-hover">
+				<thead>
+					<tr>
+						<th>{{ 'City'|trans }}</th>
+						<th>{{ 'Street'|trans }}</th>
+						<th>{{ 'Number'|trans }}</th>
+						<th>{{ 'Name'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for location in locations %}
+					<tr>
+						<td>{{ location.city|e }}</td>
+						<td>{{ location.street|e }}</td>
+						<td>{{ location.number|e }}</td>
+						<td>{{ location.name|e }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<div>
+				<ul  class="pager">
+					{% if paginator.page > 1 %}
+						{% set previous = (paginator.page - 1) %}
+							<li class="previous">
+								<a href="{{ url('locations_index', {'page': previous}) }}" title="{{ 'previous page'|trans }}"> &larr;{{ 'previous page'|trans }}</a>
+							</li>
+					{%  endif %}
+					{% if paginator.page < paginator.pagesCount %}
+						{% set next = (paginator.page + 1) %}
+						<li class="next"> 
+							<a  href="{{ url('locations_index', {'page': next}) }}" title="{{ 'next page'|trans }}">{{ 'next page'|trans }} &rarr;</a>
+						</li>
+					{% endif  %}
+				</ul>
+			</div>
+			{% for flashMessage in app.session.getFlashBag.get('message') %}
+				<div class="alert alert-{{ flashMessage.type }}" role="alert">
+					{{ flashMessage.content }}
+				</div>	
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Locations not found'|trans }}.
+			</div>
+		{% endif %}
+{% endblock %}

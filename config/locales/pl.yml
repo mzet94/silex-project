@@ -1,0 +1,154 @@
+Yes: Tak
+Orders list: Lista zamówień
+Edit profile: Edytuj profil
+Edit user: Edytuj użytkownika
+Edit seance: Edytuj seans
+Edit director: Edytuj reżysera
+Edit address: Edytuj adres
+Edit movie: Edytuj film
+Edit data: Edytuj dane
+Delete user: Usuń użytkownika
+Delete movie: Usuń film
+Delete seance: Usuń seans
+Delete director: Usuń reżysera
+Delete transaction: Usuń transakcje
+Add user: Dodaj użytkownika
+Add personal information: Dodaj dane osobiste
+Add your personal information (all fields are obligatory).: Podaj swoje dane (wszystkie pola są obowiązkowe).
+Add movie: Dodaj film
+Add director: Dodaj reżysera
+Add seance: Dodaj seans
+Add cinema: Dodaj kino
+Add address: Dodaj adres
+Address added.: Dodano adres.
+New seance added.: Dodano nowy seans.
+Transaction added.: Dodano transakcje.
+New user added.: Dodano nowego użytkownika.
+New director added.: Dodano nowego reżysera.
+New details added.: Dodano nowe dane.
+New location added.: Dodano nową lokalizację.
+Director edited.: Edytowano reżysera.
+User edited.: Edytowano użytownika.
+Seance edited.: Edytowano seans.
+Seance deleted.: Usunięto seans.
+Director deleted.: Usunięto reżysera.
+User deleted.: Użytkownik został usunięty.
+Your orders: Twoje zamówienia
+Buy a ticket: Kup bilet
+Tickets: Bilety
+Ticket price: Cena biletu
+Payment method: Sposób płatności
+Payment status: Status płatności
+Collection: Odbiór
+View more: Zobacz więcej
+Phone: Telefon
+Type the word.: Wpisz wyraz.
+bank transfer: przelew bankowy
+COD: płatność przy odbiorze
+B.O.: w kasie
+Type the number.: Wpisz liczbę.
+Please, complete your personal information!: Uzupełnij swoje dane osobiste!
+Please, complete your address!: Uzupełnij swój adres!
+For payment: Do zapłaty
+courier: kurier
+print: wydruk
+Payment method id: Sposób płatności
+Collection id: Sposób odbioru
+Director id: Reżyser
+Location id: Lokalizacja
+Movie id: Film
+List of...: Lista...
+Homepage: Strona główna
+Do you want to delete this movie?: Czy chcesz usunąć ten film?
+Do you want to delete this seance?: Czy chcesz usunąć ten seans?
+Do you want to delete this director?: Czy chcesz usunąć tego reżysera?
+Do you want to delete this transaction?: Czy chcesz usunąć tę transakcje?
+Do you want to delete this user?: Czy chcesz usunąć tego użytkownika?
+Movies: Filmów
+Password: Hasło
+More: Więcej
+Role: Rola
+Contact us: Skontaktuj się z nami
+Seances not found.: Nie znaleziono seansów.
+Seance not found.: Nie znaleziono seansu.
+Register: Zarejestruj
+You have removed your account. Thank you for using our services.: Usunąłeś swoje konto. Dziękujemy, że skorzystałeś z naszych usług.
+Seance not add.: Nie udało się dodać seansu.
+Delete account: Usuń konto
+User profile: Profil użytkownika
+Your profile: Twój profil
+Seances list: Lista seansów
+Seance: Seans
+Transaction date: Data transakcji
+Directors list: Lista reżyserów
+Cinemas list: Lista kin
+Transactions list: Lista transakcji
+User: Użytkownik
+Surname: Nazwisko
+Logging: Logowanie
+Login successful.: Logowanie zakończono sukcesem. 
+Cinemas: Kin
+Directors: Reżyserów
+Seances: Seanse
+Sign in: Zaloguj się
+Logout: Wyloguj się
+Log in: Zaloguj 
+Movie: Film
+Director: Reżyser
+Cinema: Kino
+Users list: Lista użytkowników
+Transactions: Transakcje
+Transaction: Transakcja
+Buy: Kup
+paid: zapłacone
+unpaid: niezapłacone
+Profile: Profil
+Change status: Zmień status 
+Do you want mark this transaction as paid?: Czy chcesz oznaczyć tę transakcje jako zapłaconą?
+Contact: Kontakt
+Movies list: Lista filmów
+Delete: Usuń
+Bad credentials.: Nieprawidłowe dane. 
+Transaction completed successfully.: Transakcja zakończona pomyślnie.
+Transaction data: Dane transakcji
+Transactions not found.: Nie znaleziono transakcji
+Movies not found.: Nie znaleziono filmów.
+Users not found.: Nie znaleziono użytkowników.
+Sorry, you have no permission here.: Przepraszamy, nie masz tutaj uprawnień.
+Sorry, you have no permission here: Przepraszamy, nie masz tutaj uprawnień.
+Sorry, try again.: Przepraszamy, spróbuj później.
+You have entered too many tickets.: Wpisałeś za dużą liczbę biletów!
+Can not update user profile.: Nie można pobrać danych użytkownika.
+Error. We are sorry. Try again.: Błąd. Przepraszamy, spróbuj ponownie.
+New user added. Congratulations! Please log in to continue.: Dodano nowego użytkownika. Gratulacje! Zaloguj się by kontynuować. 
+Home page: Strona główna
+Page  not found.: Strony nie znaleziono.
+Page not found: Strony nie znaleziono.
+Transaction not found.: Nie znaleziono transakcji.
+Movie Tickets: Bilety Kinowe
+Cinema: Kino
+Hall: Sala
+Time: Godzina
+Date: Data
+Seats: Ilość miejsc
+Post: Kod pocztowy
+post office: poczta
+Price: Cena
+Posted by: Dodał
+Name: Nazwa
+Street: Ulica
+Number: Numer
+City: Miasto
+First name: Imię
+Last name: Nazwisko
+Date: Data
+Create account: Załóż konto
+previous page: poprzednia strona
+next page: następna strona
+Error. Try later.: Błąd. Spróbuj później.
+Save: Zapisz
+Title: Tytuł
+Directors not found.: Nie znaleziono reżyserów.
+View profile: Zobacz profil
+Cancel: Anuluj
+Back: Powrót

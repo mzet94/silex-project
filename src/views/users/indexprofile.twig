@@ -1,0 +1,38 @@
+{# Index profile action template for Users controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Profile'|trans }}{% endblock %}
+{% block content %}
+	{% if address == NULL %}
+		<div class="alert alert-danger" role="alert">
+			{{'Please, complete your address!'|trans}}
+		</div>
+	{% endif %}
+	{% if details == NULL %}
+		<div class="alert alert-danger" role="alert">
+			{{'Please, complete your personal information!'|trans}}
+		</div>
+	{% endif %}
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<a class="btn btn-success btn-block" href="{{ url('index_orders', {'id': user.id}) }}" title="{{ 'Your orders'|trans }}">{{ 'Your orders'|trans }}</a>
+		{% if details == NULL %}
+			<a class="btn btn-primary btn-block" href="{{ url('add_more', {'id': user.id}) }}" title="{{ 'Add personal information'|trans }}">{{ 'Add personal information'|trans }}</a>
+		{% else %}
+			<a class="btn btn-default btn-block" href="{{ url('users_edit', {'id': user.id}) }}" title="{{ 'Edit data'|trans }}">{{ 'Edit data'|trans }}</a>		
+		{% endif%}
+		{% if address == NULL %}
+			<a class="btn btn-primary btn-block" href="{{ url('add_address', {'id': user.id}) }}" title="{{ 'Add address'|trans }}">{{ 'Add address'|trans }}</a>
+		{% else %}
+			<a class="btn btn-default btn-block" href="{{ url('edit_address', {'id': user.id}) }}" title="{{ 'Edit address'|trans }}">{{ 'Edit address'|trans }}</a>
+		{% endif %}
+		<a class="btn btn-info btn-block" href="{{ url('users_view', {'id': user.id}) }}" title="{{ 'View profile'|trans }}">{{ 'View profile'|trans }}</a>
+		<a class="btn btn-danger btn-block" href="{{ url('users_delete', {'id': user.id}) }}" title="{{ 'Delete account'|trans }}">{{ 'Delete account'|trans }}</a>
+	</div>
+	<div class="col-md-4"></div>
+	{% for flashMessage in app.session.getFlashBag.get('message') %}
+		<div class="alert alert-{{ flashMessage.type }}" role="alert">
+			{{ flashMessage.content }}
+		</div>
+	{% endfor %}
+{% endblock %}

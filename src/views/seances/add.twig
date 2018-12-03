@@ -1,0 +1,34 @@
+{# Add action template for Seances controller #}
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Add seance'|trans }}{% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<h2>{{ 'Add seance'|trans }}</h2>
+				<form action="{{ url('seances_add') }}" method="post">
+					{{ form_widget(form) }}
+					<input class="btn btn-success" type="submit" name="submit" value="{{ 'Save'|trans }}" />
+					<div>
+						<a class="btn btn-default" href="{{ url('seances_index', {'page': 1 }) }}" title="{{ 'Back'|trans }}">{{ 'Back'|trans }}</a>
+					</div>
+				</form>
+				{% for flashMessage in app.session.getFlashBag.get('message') %}
+					<div class="alert alert-{{ flashMessage.type }}" role="alert">
+						{{ flashMessage.content }}
+					</div>
+				{% endfor %}
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ 'Sorry, you have no permission here.'|trans }}
+			</div>
+			<a class="btn btn-default" href="{{ url('seances_index')}}" title="{{ 'Home page'|trans }}">{{ 'Home page'|trans }}</a>
+		{% endif %}
+	{% else %}
+		<div class="alert alert-danger" role="alert">
+			{{ 'Sorry, you have no permission here.'|trans }}
+		</div>
+		<a class="btn btn-default" href="{{ url('auth_login')}}" title="{{ 'Sign in'|trans }}">{{ 'Sign in'|trans }}</a>
+	{% endif %}
+{% endblock %}
+

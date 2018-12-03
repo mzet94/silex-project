@@ -1,0 +1,11 @@
+{% extends 'base.twig' %}
+
+{% block title %}{{ 'Log out'|trans }}{% endblock %}
+{% block content %}
+    <h1>{{ 'Logout'|trans }}</h1>
+    {{ error }}
+    <form action="{{ path('auth_logout_check') }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" name="submit" value="{{ 'Logout'|trans }}" />
+    </form>
+{% endblock %}

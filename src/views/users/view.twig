@@ -1,0 +1,66 @@
+{# View action template for Users controller #}
+{% extends 'base.twig' %}
+
+{% block title %} {{ 'User'|trans }} {% endblock %}
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{% if user.id == current %}
+			{% if user|length > 0 %}
+				<h2>{{ 'Your profile'|trans }}</h2>
+					<table class="table table-responsive table-hover">
+						<thead>
+							<tr>
+								<td>{{ 'Login'|trans }}</td>
+								<td>{{ user.login }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Role'|trans }}</td>
+								<td>{{ user.name }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'First name'|trans }}</td>
+								<td>{{ user.firstName }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Surname'|trans }}</td>
+								<td>{{ user.surname }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Mail'|trans }}</td>
+								<td>{{ user.email }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Phone'|trans }}</td>
+								<td>{{ user.phone }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'City'|trans }}</td>
+								<td>{{ user.city }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Street'|trans }}</td>
+								<td>{{ user.street }} {{ user.number }}</td>
+							</tr>
+							<tr>
+								<td>{{ 'Post'|trans }}</td>
+								<td>{{ user.post }}</td>
+							</tr>
+						</thead>
+					</table>
+					<a class="btn btn-default" href="{{ url('users_indexprofile') }}">{{ 'Back'|trans }}</a>
+					<a class="btn btn-info" href="{{ url('users_edit', {'id' : user.id}) }}">{{ 'Edit profile'|trans }}</a>
+					<a class="btn btn-danger" href="{{ url('users_delete', {'id' : user.id}) }}">{{ 'Delete account'|trans }}</a>
+			{% endif %}
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{'Sorry, you have no permission here.'|trans}}
+			</div>
+			<a class="btn btn-default" href="{{ url('seances_index') }}">{{ 'Homepage'|trans }}</a>	
+		{% endif %}	
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+			<div class="alert alert-{{ flashMessage.type }}" role="alert">
+				{{ flashMessage.content }}
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
